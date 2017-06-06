@@ -1,11 +1,11 @@
 within DriveControl.Examples;
 model CurrentControlled "Current controlled drive"
   extends Interfaces.PartialExample;
-  Blocks.CurrentController currentController(data=data, kFF_InducedVoltage=1)
+  Blocks.CurrentController currentController(data=data)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-60,0})));
-  Modelica.Blocks.Sources.Step referenceTorque(             height=data.tauNom,
+  Modelica.Blocks.Sources.Step referenceTorque(height=data.tauNom,
     offset=0,
     startTime=0.1)
     annotation (Placement(transformation(extent={{-70,-40},{-50,-20}})));

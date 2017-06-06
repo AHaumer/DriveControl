@@ -3,8 +3,10 @@ partial block PartialController "Partial controller block"
   extends Modelica.Blocks.Icons.Block;
   parameter DataRecords.Data data
     annotation (Placement(transformation(extent={{-90,70},{-70,90}})));
+  parameter Real kTune=1 "Tune proportional gain of controller"
+    annotation(Dialog(group="Advanced"));
   parameter Boolean use_preFilter=true "Use reference pre-filter?"
-    annotation(Dialog(tab="Advanced"), choices(checkBox=true), Evaluate=true);
+    annotation(Dialog(group="Advanced"), choices(checkBox=true), Evaluate=true);
   Interfaces.DriveBus driveBus annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=270,
@@ -20,7 +22,7 @@ partial block PartialController "Partial controller block"
   Blocks.LimPI controller(
     initType=Modelica.Blocks.Types.Init.InitialState,
     kFF=1)
-    annotation (Placement(transformation(extent={{30,-10},{50,10}})));
+    annotation (Placement(transformation(extent={{40,-10},{60,10}})));
 protected
   Modelica.Blocks.Interfaces.RealInput u "Connector of Real input signal"
     annotation (Placement(transformation(extent={{-54,-4},{-46,4}})));
@@ -30,7 +32,7 @@ equation
           -50,-20},{-50,0}}, color={0,0,127}));
   end if;
   connect(controlError.y, controller.u)
-    annotation (Line(points={{19,0},{28,0}}, color={0,0,127}));
+    annotation (Line(points={{19,0},{38,0}}, color={0,0,127}));
   connect(preFilter.y,controlError. u1)
     annotation (Line(points={{-19,0},{-19,0},{2,0}},    color={0,0,127}));
   connect(preFilter.u, u)

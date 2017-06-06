@@ -5,15 +5,15 @@ block CurrentController "Current controller"
     preFilter(T=data.TfI),
     controller(
       final useI=true,
-      k=data.kpI,
       T=data.TiI,
       YMax=data.VMax,
       YMin=-data.VMax,
       final FeedForward=true,
       kFF=kFF_InducedVoltage,
-      limitation=DriveControl.Types.Limitation.Symmetrical));
+      limitation=DriveControl.Types.Limitation.Symmetrical,
+      k=kTune*data.kpI));
   parameter Real kFF_InducedVoltage=1 "Feed-forward of induced voltage"
-    annotation(Dialog(tab="Advanced"), Evaluate=true);
+    annotation(Dialog(group="Advanced"), Evaluate=true);
   Interfaces.DriveBus driveBus annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=270,
@@ -31,16 +31,16 @@ block CurrentController "Current controller"
         transformation(
         extent={{10,10},{-10,-10}},
         rotation=270,
-        origin={40,-30})));
+        origin={50,-30})));
 equation
-  connect(feedForward.u, driveBus.wAct) annotation (Line(points={{40,-42},{40,
+  connect(feedForward.u, driveBus.wAct) annotation (Line(points={{50,-42},{50,
           -50},{100.1,-50},{100.1,-0.1}},    color={0,0,127}));
   connect(smoothing.u, driveBus.iAct) annotation (Line(points={{10,-42},{10,-42},
           {10,-60},{100.1,-60},{100.1,-0.1}},color={0,0,127}));
   connect(smoothing.y, controlError.u2)
     annotation (Line(points={{10,-19},{10,-8}}, color={0,0,127}));
   connect(feedForward.y, controller.feedForward)
-    annotation (Line(points={{40,-19},{40,-19},{40,-12}}, color={0,0,127}));
+    annotation (Line(points={{50,-19},{50,-12}},          color={0,0,127}));
   connect(referenceLimiter.y, tau2i.u) annotation (Line(points={{-1,50},{-1,50},
           {-90,50},{-90,0},{-82,0}}, color={0,0,127}));
   connect(referenceLimiter.u, driveBus.tauRef) annotation (Line(points={{22,50},
@@ -49,13 +49,13 @@ equation
           50},{-46,50},{-90,50},{-90,30},{100.1,30},{100.1,-0.1}}, color={0,0,
           127}));
   connect(controller.y, driveBus.vRef)
-    annotation (Line(points={{51,0},{100.1,0},{100.1,-0.1}}, color={0,0,127}));
+    annotation (Line(points={{61,0},{100.1,0},{100.1,-0.1}}, color={0,0,127}));
   connect(u, tau2i.y)
     annotation (Line(points={{-50,0},{-59,0},{-59,0}}, color={0,0,127}));
   connect(u, driveBus.iRef) annotation (Line(points={{-50,0},{-50,0},{-50,30},
           {100.1,30},{100.1,-0.1}},color={0,0,127}));
-  connect(controller.yMax, driveBus.vBat) annotation (Line(points={{28,6},{20,6},
-          {20,20},{100.1,20},{100.1,-0.1}}, color={0,0,127}));
+  connect(controller.yMax, driveBus.vBat) annotation (Line(points={{38,6},{32,6},
+          {32,20},{100.1,20},{100.1,-0.1}}, color={0,0,127}));
   annotation (Icon(graphics={Text(
           extent={{-100,20},{100,-20}},
           lineColor={28,108,200},

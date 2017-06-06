@@ -5,8 +5,7 @@ model SpeedControlled "Speed controlled drive"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-60,0})));
-  Blocks.SpeedController speedController(data=data, w0=referenceSpeed.offset,
-    kFF_Acceleration=0)
+  Blocks.SpeedController speedController(data=data, w0=referenceSpeed.offset)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-60,30})));

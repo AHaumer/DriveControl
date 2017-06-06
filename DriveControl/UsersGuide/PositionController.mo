@@ -17,12 +17,12 @@ multiplied by the integrator &phi; = &omega; / s, we start with:</p>
 <b>Note:</b> 
 Since we simplified the transfer function of the speed controlled drive, we have to adapt the proportional gain k<sub>p</sub> of the position controller, 
 using the parameter k<sub>Tune</sub>&lt;1 in the <a href=\"modelica://DriveControl.DataRecords.Data\">data record</a>, to avoid overshot of the end position. 
-Since maximum speed and maximum acceleration (defined by maximum torque) are limited, a <a href=\"modelica://DriveControl.Blocks.Der2Limiter\">Der2Limiter block</a> 
-can be used to limit both speed and torque.
+Since maximum speed and maximum acceleration (defined by maximum torque) are limited, a <a href=\"modelica://DriveControl.Blocks.Ptp\">point-to-point source block</a> 
+can be used to calculate an optmal reference trajectory.
 </p>
 <p>
 The example <a href=\"modelica://DriveControl.Examples.PositionControlled\">PositionControlled</a>
-applies a reference position step (which is unphysical!) to the position controlled drive at stand still, 
+applies a reference position trajectory to the position controlled drive at stand still, 
 the load torque is linearly dependent on speed switched on after no-load positioning to demonstrate the effect of a disturbance.
 </p>
 <p>
