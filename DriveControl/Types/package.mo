@@ -8,7 +8,7 @@ extends Modelica.Icons.TypesPackage;
     Unidirectional   "Variable upper limit, lower limit = 0",
     Symmetrical   "Variable upper limit = - lower limit",
     Variable   "Variable limits")
-    "Speed dependency of load torque";
+    "PI controller limitation";
 
   annotation (Documentation(info="<html>
 <p>

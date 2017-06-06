@@ -52,9 +52,7 @@ record Data "Data of the whole drive, including load and controller"
   parameter Modelica.SIunits.Angle phiMin=-inf "Minimum position"
     annotation(Dialog(tab="Limits", group="Limits"));
   //Current controller: absolute optimum
-  parameter Real kTuneI=1 "Tune gain current controller"
-    annotation(Dialog(tab="Controller", group="Current controller"));
-  parameter Modelica.SIunits.Resistance kpI=kTuneI*Ra*Ta/(2*Ts) "Propotional gain current controller"
+  parameter Modelica.SIunits.Resistance kpI=Ra*Ta/(2*Ts) "Propotional gain current controller"
     annotation(Dialog(tab="Controller", group="Current controller"));
   parameter Modelica.SIunits.Time TiI=Ta "Integral time constant current controller"
     annotation(Dialog(tab="Controller", group="Current controller"));
@@ -69,18 +67,14 @@ record Data "Data of the whole drive, including load and controller"
   //Speed controller: symmetrical optimum
   parameter Real a=2 "Symmetrical optimum"
     annotation(Dialog(tab="Controller", group="Speed controller"));
-  parameter Real kTuneW=1 "Tune gain current controller"
-    annotation(Dialog(tab="Controller", group="Speed controller"));
-  parameter Modelica.SIunits.Inertia kpW=kTuneW*tauNom/wNom*Tm/(a*Tsub) "Propotional gain speed controller"
+  parameter Modelica.SIunits.Inertia kpW=tauNom/wNom*Tm/(a*Tsub) "Propotional gain speed controller"
     annotation(Dialog(tab="Controller", group="Speed controller"));
   parameter Modelica.SIunits.Time TiW=a^2*Tsub "Integral time constant speed controller"
     annotation(Dialog(tab="Controller", group="Speed controller"));
   parameter Modelica.SIunits.Time TfW=TiW "Prefilter speed controller"
     annotation(Dialog(tab="Controller", group="Speed controller"));
   //Position controller
-  parameter Real kTuneP=1.2 "Tune gain position controller"
-    annotation(Dialog(tab="Controller", group="Position controller"));
-  parameter Modelica.SIunits.DampingCoefficient kpP=kTuneP/(16*Tsub) "Propotional gain position controller"
+  parameter Modelica.SIunits.DampingCoefficient kpP=1/(16*Tsub) "Propotional gain position controller"
     annotation(Dialog(tab="Controller", group="Position controller"));
 annotation(defaultComponentPrefixes="parameter", defaultComponentName="data", Icon(graphics={   Text(
           extent={{-100,-14},{100,-36}},

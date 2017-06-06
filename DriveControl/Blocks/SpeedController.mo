@@ -2,21 +2,21 @@ within DriveControl.Blocks;
 block SpeedController "Speed controller"
   extends DriveControl.Interfaces.PartialController(
     referenceLimiter(uMax=data.wMax, uMin=-data.wMax),
-    preFilter(T=data.TfW),
+    preFilter(T=data.TfW, y_start=w0),
     controller(
       final useI=true,
-      k=data.kpW,
       T=data.TiW,
       YMax=data.tauMax,
       YMin=-data.tauMax,
       final FeedForward=true,
-      kFF=kFF_Acceleration));
+      kFF=kFF_Acceleration,
+      k=kTune*data.kpW));
   parameter Real kFF_Acceleration=0 "Feed-forward of acceleration"
-    annotation(Dialog(tab="Advanced"));
+    annotation(Dialog(group="Advanced"));
   parameter Modelica.SIunits.AngularVelocity w0=0 "Initial speed"
-    annotation(Dialog(group="Slew rate limiter"));
+    annotation(Dialog(group="Advanced"));
   parameter Modelica.SIunits.Time Td=1e-6 "Derivative time constant of slewRateLimiter"
-    annotation(Dialog(group="Slew rate limiter"));
+    annotation(Dialog(group="Advanced"));
   SlewRateLimiter slewRateLimiter(
     Rising=data.aMax,
     Falling=-data.aMax,
@@ -29,26 +29,26 @@ block SpeedController "Speed controller"
         transformation(
         extent={{10,10},{-10,-10}},
         rotation=270,
-        origin={40,-30})));
+        origin={50,-30})));
 equation
   connect(slewRateLimiter.y, a.u) annotation (Line(points={{-41,50},{-90,50},{
           -90,-50},{-42,-50}},
                            color={0,0,127}));
-  connect(a.y, feedForward.u) annotation (Line(points={{-19,-50},{10,-50},{40,
-          -50},{40,-42}},
+  connect(a.y, feedForward.u) annotation (Line(points={{-19,-50},{10,-50},{50,
+          -50},{50,-42}},
                      color={0,0,127}));
   connect(referenceLimiter.y, slewRateLimiter.u)
     annotation (Line(points={{-1,50},{-18,50}}, color={0,0,127}));
   connect(slewRateLimiter.y, u) annotation (Line(points={{-41,50},{-41,50},{-90,
           50},{-90,0},{-50,0}}, color={0,0,127}));
   connect(controller.y, driveBus.tauRef)
-    annotation (Line(points={{51,0},{100.1,0},{100.1,-0.1}}, color={0,0,127}));
+    annotation (Line(points={{61,0},{100.1,0},{100.1,-0.1}}, color={0,0,127}));
   connect(referenceLimiter.u, driveBus.wRef) annotation (Line(points={{22,50},{
           62,50},{100.1,50},{100.1,-0.1}}, color={0,0,127}));
   connect(slewRateLimiter.y, driveBus.wRefLim) annotation (Line(points={{-41,50},
           {-66,50},{-90,50},{-90,30},{100.1,30},{100.1,-0.1}}, color={0,0,127}));
   connect(feedForward.y, controller.feedForward)
-    annotation (Line(points={{40,-19},{40,-14},{40,-12}}, color={0,0,127}));
+    annotation (Line(points={{50,-19},{50,-16},{50,-12}}, color={0,0,127}));
   connect(controlError.u2, driveBus.wAct) annotation (Line(points={{10,-8},{10,
           -8},{10,-60},{100.1,-60},{100.1,-0.1}}, color={0,0,127}));
   annotation (Icon(graphics={Text(

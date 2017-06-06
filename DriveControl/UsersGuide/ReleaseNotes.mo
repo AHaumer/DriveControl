@@ -30,9 +30,14 @@ annotation (Documentation(info="<html>
 <li>Improvement of LimPI block with variable limits</li>
 <li>Output of current controller limited by variable battery voltage</li>
 </ul>
-<h5>To Do, 2017-05-19</h5>
+<h5>Version 3.0.0, 2017-06-03</h5>
 <ul>
-<li>Clean implementation of Der2Limiter</li>
+<li>Use Modelica.Blocks.Sources.KinematicP2P2 as reference position source</li>
+</ul>
+<h5>Version 3.1.0, 2017-06-06</h5>
+<ul>
+<li>Use own P2P as reference position source</li>
+<li>Moved tuning factros of proportional gains of controllers from data record to controller</li>
 </ul>
 </html>"));
 end ReleaseNotes;

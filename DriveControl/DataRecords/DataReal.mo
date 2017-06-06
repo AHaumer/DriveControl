@@ -11,8 +11,7 @@ record DataReal "Data for a real drive"
     Td=20E-3/12,
     JL=1,
     IMax=(3/pi*sqrt(2)*400 - kPhi*wMax)/Ra,
-    VMax=3/pi*sqrt(2)*400,
-    kTuneP=1);
+    VMax=3/pi*sqrt(2)*400);
   import Modelica.SIunits.Conversions.from_rpm;
   import Modelica.Constants.pi;
 annotation(defaultComponentPrefixes="parameter",  defaultComponentName="data", preferredView="info", Documentation(info="<html>
