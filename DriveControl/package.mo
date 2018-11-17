@@ -15,7 +15,7 @@ package DriveControl "Library to demonstrate control of electrical drives"
 
 
 
-   annotation (uses(Modelica(version="3.2.2")), version="3.1.0", versionDate="2017-06-06",
+   annotation (uses(Modelica(version="3.2.2")), version="4.0.0", versionDate="2018-11-17",
     preferredView="info", Documentation(info="<html>
 <p><a href=\"https://www.oth-regensburg.de/en/faculties/electrical-engineering-and-information-technology.html\"><img src=\"modelica://DriveControl/Resources/Images/OTH_EI.png\" align=\"middle\"></a> 
    <a href=\"http://www.edrives.eu/\"><img src=\"modelica://DriveControl/Resources/Images/EDrives.png\" align=\"middle\"></a></p>

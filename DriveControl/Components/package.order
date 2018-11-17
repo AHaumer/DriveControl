@@ -1,4 +1,5 @@
 IdealBattery
-IdealInverter
+IdealDcDcInverter
+DcDcHbridge
 IdealMotor
 Load

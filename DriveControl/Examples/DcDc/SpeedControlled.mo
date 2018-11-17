@@ -1,6 +1,6 @@
-within DriveControl.Examples;
+within DriveControl.Examples.DcDc;
 model SpeedControlled "Speed controlled drive"
-  extends Interfaces.PartialExample(load(startTime=0.5));
+  extends Interfaces.PartialExampleIdealDcDc(load(startTime=0.7));
   Blocks.CurrentController currentController(data=data)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=0,
@@ -28,7 +28,7 @@ equation
   annotation (
     Diagram(coordinateSystem(                                initialScale=0.1)),
     Icon(coordinateSystem(extent={{-100,-100},{100,100}}, initialScale=0.1)),
-    experiment(Interval=0.001),
+    experiment(Interval=0.0001),
     Documentation(info="<html>
 <p>
 See: <a href=\"modelica://DriveControl.UsersGuide.SpeedController\">User's guide, Speed controller</a>

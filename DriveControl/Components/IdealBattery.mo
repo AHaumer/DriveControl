@@ -1,13 +1,11 @@
 within DriveControl.Components;
 model IdealBattery "Ideal linear DC source"
   extends DriveControl.Interfaces.PartialBattery;
-  parameter Modelica.SIunits.Voltage V0 "No-load voltage";
-  parameter Modelica.SIunits.Resistance Ri "Inner resistance";
-  Modelica.Electrical.Analog.Basic.Resistor ri(final R=Ri)
+  Modelica.Electrical.Analog.Basic.Resistor ri(final R=data.Ri)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=90,
         origin={0,40})));
-  Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V=V0)
+  Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V=data.Vdc0)
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,

@@ -2,21 +2,33 @@ within DriveControl.DataRecords;
 record Data "Data of the whole drive, including load and controller"
   extends Modelica.Icons.Record;
   import Modelica.Constants.inf;
+  import Modelica.Constants.pi;
   constant String drive="fictious";
   parameter Modelica.SIunits.Inertia Jtot=Jr + JL "Inertia machine + load"
     annotation(Dialog(enable=false));
   parameter Modelica.SIunits.Time Tm=Jtot*wNom/tauNom "Mechanical time constant"
     annotation(Dialog(enable=false));
   //Load
-  parameter Modelica.SIunits.Inertia JL=0.05 "Inertia load"
+  parameter Modelica.SIunits.Inertia JL=Jr "Inertia load"
     annotation(Dialog(group="Load"));
-  parameter Modelica.SIunits.Torque tauL=tauNom "Load torque"
+  parameter Modelica.SIunits.Torque tauL=tauShaft "Load torque"
     annotation(Dialog(group="Load"));
   parameter Modelica.SIunits.AngularVelocity wL=wNom "Load speed"
     annotation(Dialog(group="Load"));
+  //Source
+  parameter Modelica.SIunits.Voltage Vdc0=VMax + Ri*IMax "No-load DC-voltage of source"
+    annotation(Dialog(group="Source"));
+  parameter Modelica.SIunits.Current IdcMax=100*IMax "Short-cirucit DC-current of source"
+    annotation(Dialog(group="Source"));
+  parameter Modelica.SIunits.Resistance Ri=Vdc0/IdcMax "Inner resistamce of DC-source"
+    annotation(Dialog(group="Source"));
   //Inverter
-  parameter Modelica.SIunits.Time Td=0.005 "Deadtime inverter"
+  parameter Modelica.SIunits.Frequency fS=1000 "Switching frequency"
     annotation(Dialog(group="Inverter"));
+  parameter Modelica.SIunits.Time Td=0.5/fS "Deadtime inverter"
+    annotation(Dialog(group="Inverter"));
+  parameter Modelica.SIunits.Inductance Ldc=0*La "DC smoothing inductor"
+    annotation(Dialog(group="Inverter"), Evaluate=true);
   //Machine
   parameter Modelica.SIunits.Voltage VNom=105 "Nominal voltage"
     annotation(Dialog(tab="Machine"));
@@ -32,10 +44,16 @@ record Data "Data of the whole drive, including load and controller"
     annotation(Dialog(tab="Machine", enable=false));
   parameter Modelica.SIunits.Torque tauNom=kPhi*INom "Nominal torque"
     annotation(Dialog(tab="Machine", enable=false));
+  parameter Modelica.SIunits.Torque tauShaft=tauNom - tauFric "Nominal shaft torque"
+    annotation(Dialog(tab="Machine", enable=false));
   parameter Modelica.SIunits.AngularVelocity wNom=100 "Nominal speed"
     annotation(Dialog(tab="Machine"));
   parameter Modelica.SIunits.Inertia Jr=0.05 "Inertia of machine rotor"
     annotation(Dialog(tab="Machine"));
+  parameter Modelica.SIunits.Power PFric=0 "Friction losses at nominal speed"
+    annotation(Dialog(tab="Machine"), Evaluate=true);
+  parameter Modelica.SIunits.Torque tauFric=PFric/wNom "Friction torque at nominal speed"
+    annotation(Dialog(tab="Machine"), Evaluate=true);
   //Limits
   parameter Modelica.SIunits.Voltage VMax=kPhi*wMax + Ra*IMax "Maximum voltage >= kPhi*wMax + Ra*IMax"
     annotation(Dialog(tab="Limits", group="Limits"));
@@ -52,13 +70,13 @@ record Data "Data of the whole drive, including load and controller"
   parameter Modelica.SIunits.Angle phiMin=-inf "Minimum position"
     annotation(Dialog(tab="Limits", group="Limits"));
   //Current controller: absolute optimum
-  parameter Modelica.SIunits.Resistance kpI=Ra*Ta/(2*Ts) "Propotional gain current controller"
+  parameter Modelica.SIunits.Resistance kpI=Ra*Ta/(2*Ts) "Proportional gain current controller"
     annotation(Dialog(tab="Controller", group="Current controller"));
   parameter Modelica.SIunits.Time TiI=Ta "Integral time constant current controller"
     annotation(Dialog(tab="Controller", group="Current controller"));
   parameter Modelica.SIunits.Time Ts=Td + TsI "Sum of small time constants"
     annotation(Dialog(tab="Controller", group="Current controller", enable=false));
-  parameter Modelica.SIunits.Time TsI=Td "Smoothing time constant current controller"
+  parameter Modelica.SIunits.Time TsI=2/(2*pi*fS) "Smoothing time constant current controller"
     annotation(Dialog(tab="Controller", group="Current controller"));
   parameter Modelica.SIunits.Time TfI=TsI "Prefilter current controller"
     annotation(Dialog(tab="Controller", group="Current controller"));
@@ -84,9 +102,10 @@ annotation(defaultComponentPrefixes="parameter", defaultComponentName="data", Ic
 <p>
 Data record, summarizing all parameters of:
 <ul>
-<li>the machine</li>
-<li>the inverter</li>
 <li>the mechanical load</li>
+<li>the source</li>
+<li>the inverter</li>
+<li>the machine</li>
 <li>the limitations</li>
 <li>the current controller</li>
 <li>the speed controller</li>

@@ -1,6 +1,8 @@
 within DriveControl.Interfaces;
 partial model PartialBattery "Partial DC source"
   parameter Modelica.SIunits.Charge Q0(displayUnit="A.h")=0 "Initial charge";
+  parameter DataRecords.Data data
+    annotation (Placement(transformation(extent={{-80,60},{-60,80}})));
   Modelica.Electrical.Analog.Interfaces.PositivePin bat_p
     "Positive DC input"
     annotation (Placement(transformation(extent={{90,70},{110,50}})));
@@ -11,17 +13,18 @@ partial model PartialBattery "Partial DC source"
     annotation (Placement(transformation(extent={{70,-100},{90,-80}})));
   Modelica.Electrical.Analog.Sensors.CurrentSensor currentSensor
     annotation (Placement(transformation(extent={{40,70},{60,50}})));
-  Modelica.Blocks.Continuous.Integrator charge(k=1,
+  Modelica.Blocks.Continuous.Integrator charge(
     initType=Modelica.Blocks.Types.Init.InitialOutput,
-    y_start=Q0)
-    annotation (Placement(transformation(extent={{60,70},{80,90}})));
+    y_start=Q0,
+    k=-1)
+    annotation (Placement(transformation(extent={{40,70},{20,90}})));
   Modelica.SIunits.Charge Q(displayUnit="A.h")=charge.y "Charge";
 equation
   connect(ground.p, bat_n)
     annotation (Line(points={{80,-80},{80,-80},{80,-60},{80,-60},{80,-60},{100,-60},
           {100,-60}},                                       color={0,0,255}));
   connect(currentSensor.i, charge.u)
-    annotation (Line(points={{50,70},{50,80},{58,80}}, color={0,0,127}));
+    annotation (Line(points={{50,70},{50,80},{42,80}}, color={0,0,127}));
   connect(currentSensor.n, bat_p)
     annotation (Line(points={{60,60},{100,60}},          color={0,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={

@@ -20,27 +20,17 @@ block CurrentController "Current controller"
         origin={100,0})));
   Modelica.Blocks.Math.Gain tau2i(k=1/data.kPhi)
     annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
-  Modelica.Blocks.Continuous.FirstOrder smoothing(
-    final k=1,
-    initType=Modelica.Blocks.Types.Init.InitialOutput,
-    final T=data.TsI) annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=90,
-        origin={10,-30})));
   Modelica.Blocks.Math.Gain feedForward(k=data.kPhi) annotation (Placement(
         transformation(
-        extent={{10,10},{-10,-10}},
-        rotation=270,
-        origin={50,-30})));
+        extent={{10,-10},{-10,10}},
+        rotation=0,
+        origin={70,-20})));
 equation
-  connect(feedForward.u, driveBus.wAct) annotation (Line(points={{50,-42},{50,
-          -50},{100.1,-50},{100.1,-0.1}},    color={0,0,127}));
-  connect(smoothing.u, driveBus.iAct) annotation (Line(points={{10,-42},{10,-42},
-          {10,-60},{100.1,-60},{100.1,-0.1}},color={0,0,127}));
-  connect(smoothing.y, controlError.u2)
-    annotation (Line(points={{10,-19},{10,-8}}, color={0,0,127}));
+  connect(feedForward.u, driveBus.wAct) annotation (Line(points={{82,-20},{100,
+          -20},{100,-10},{100.1,-10},{100.1,-0.1}},
+                                             color={0,0,127}));
   connect(feedForward.y, controller.feedForward)
-    annotation (Line(points={{50,-19},{50,-12}},          color={0,0,127}));
+    annotation (Line(points={{59,-20},{50,-20},{50,-12}}, color={0,0,127}));
   connect(referenceLimiter.y, tau2i.u) annotation (Line(points={{-1,50},{-1,50},
           {-90,50},{-90,0},{-82,0}}, color={0,0,127}));
   connect(referenceLimiter.u, driveBus.tauRef) annotation (Line(points={{22,50},
@@ -54,8 +44,10 @@ equation
     annotation (Line(points={{-50,0},{-59,0},{-59,0}}, color={0,0,127}));
   connect(u, driveBus.iRef) annotation (Line(points={{-50,0},{-50,0},{-50,30},
           {100.1,30},{100.1,-0.1}},color={0,0,127}));
-  connect(controller.yMax, driveBus.vBat) annotation (Line(points={{38,6},{32,6},
-          {32,20},{100.1,20},{100.1,-0.1}}, color={0,0,127}));
+  connect(controller.yMax, driveBus.vSrc) annotation (Line(points={{38,6},{30,6},
+          {30,20},{100.1,20},{100.1,-0.1}}, color={0,0,127}));
+  connect(controlError.u2, driveBus.iAct) annotation (Line(points={{10,-8},{10,
+          -40},{100.1,-40},{100.1,-0.1}}, color={0,0,127}));
   annotation (Icon(graphics={Text(
           extent={{-100,20},{100,-20}},
           lineColor={28,108,200},

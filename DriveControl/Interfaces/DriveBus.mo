@@ -10,11 +10,15 @@ expandable connector DriveBus "Signal bus"
   Modelica.SIunits.Torque tauRef "Reference torque";
   Modelica.SIunits.Torque tauRefLim "Limited reference torque";
   Modelica.SIunits.Current iRef "Reference current";
-  Modelica.SIunits.Current iAct "Actual current";
+  Modelica.SIunits.Current iAct "Actual current (filtered)";
+  Modelica.SIunits.Current iActAv "Actual current (average)";
   Modelica.SIunits.Voltage vRef "Reference voltage";
-  Modelica.SIunits.Voltage vAct "Actual voltage";
-  Modelica.SIunits.Current iBat "Battery current";
-  Modelica.SIunits.Voltage vBat "Battery voltage";
+  Modelica.SIunits.Voltage vAct "Actual voltage (filtered)";
+  Modelica.SIunits.Voltage vActAv "Actual voltage (average)";
+  Modelica.SIunits.Current iSrc "Source current (filtered)";
+  Modelica.SIunits.Current iSrcAv "Source current (average)";
+  Modelica.SIunits.Voltage vSrc "Source voltage (filtered)";
+  Modelica.SIunits.Voltage vSrcAv "Source voltage (average)";
   annotation (preferredView="info", Documentation(info="<html>
 <p>
 Signal bus (i.e. an expandable connector) summarizing the values communicated between components. 

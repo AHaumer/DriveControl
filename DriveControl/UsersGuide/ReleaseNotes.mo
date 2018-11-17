@@ -37,7 +37,21 @@ annotation (Documentation(info="<html>
 <h5>Version 3.1.0, 2017-06-06</h5>
 <ul>
 <li>Use own P2P as reference position source</li>
-<li>Moved tuning factros of proportional gains of controllers from data record to controller</li>
+<li>Moved tuning factors of proportional gains of controllers from data record to controller</li>
+</ul>
+<h5>Version 4.0.0, 2018-11-17</h5>
+<p>
+<b>Note:</b> This is a non backward compatible enhancement of the library.
+</p>
+<ul>
+<li>Renamed some sub-packages and models, preparing switching inverters with same partial model as ideal inverters</li>
+<li>Removed smoothing from current controller, implemented smoothing of source and motor voltages and currents in partial inverter instead.</l>
+<li>Changed naming of drive bus variables iBat, vBat to iSrc, vSrc preparing AC/DC inverters<li>
+<li>Added source and motor voltages and currents averaged over one switching period to drive bus<li>
+<li>Implemented DC smoothing inductor</li>
+<li>Implemented optional friction losses</li>
+<li>Implemented additional parameter records</li>
+<li>Implemented parameter switching frequency of inverter, subsequently calculation of deadtime and smoothing time constant</li>
 </ul>
 </html>"));
 end ReleaseNotes;

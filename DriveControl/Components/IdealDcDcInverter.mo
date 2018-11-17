@@ -1,6 +1,6 @@
 within DriveControl.Components;
-model IdealInverter "Ideal DC/DC inverter"
-  extends DriveControl.Interfaces.PartialInverter;
+model IdealDcDcInverter "Ideal DC/DC inverter"
+  extends DriveControl.Interfaces.PartialDcDcInverter;
   parameter Modelica.SIunits.Time Ti=1e-6 "Integral time constant of power balance";
   Modelica.Electrical.Analog.Sensors.PowerSensor powerSensor1 annotation (
       Placement(transformation(
@@ -63,9 +63,7 @@ equation
   connect(deadTime.y, signalVoltage.v)
     annotation (Line(points={{8.88178e-016,11},{8.88178e-016,20},{43,20}},
                                                         color={0,0,127}));
-  connect(signalVoltage.n, currentMot.n)
-    annotation (Line(points={{50,10},{50,-40}}, color={0,0,255}));
-  connect(powerSensor1.pc, bat_p) annotation (Line(points={{-80,80},{-80,80},{
+  connect(powerSensor1.pc,src_p)  annotation (Line(points={{-80,80},{-80,80},{
           -100,80},{-100,60}}, color={0,0,255}));
   connect(powerSensor2.nc, mot_p) annotation (Line(points={{80,80},{90,80},{100,
           80},{100,60}}, color={0,0,255}));
@@ -75,7 +73,7 @@ equation
           {90,-80}}, color={0,0,255}));
   connect(mot_n, powerSensor2.nv) annotation (Line(points={{100,-60},{70,-60},{
           70,-60},{70,-60},{70,70}}, color={0,0,255}));
-  connect(bat_n, powerSensor1.nv) annotation (Line(points={{-100,-60},{-70,-60},
+  connect(src_n, powerSensor1.nv) annotation (Line(points={{-100,-60},{-70,-60},
           {-70,70}},                     color={0,0,255}));
   connect(integrator.y, signalCurrent.i)
     annotation (Line(points={{-31,40},{-43,40}},          color={0,0,127}));
@@ -85,18 +83,28 @@ equation
           69},{62,40},{18,40}}, color={0,0,127}));
   connect(negate.y, limiter.limit2)
     annotation (Line(points={{8,-55.6},{8,-42}}, color={0,0,127}));
-  connect(limiter.limit1, driveBus.vBat) annotation (Line(points={{-8,-42},{-8,
-          -42},{-8,-70},{0.1,-70},{0.1,-99.9}}, color={0,0,127}));
-  connect(negate.u, driveBus.vBat) annotation (Line(points={{8,-64.8},{8,-70},{
-          0.1,-70},{0.1,-99.9}}, color={0,0,127}));
-  connect(currentBat.p, signalCurrent.n)
+  connect(currentSrc.p, signalCurrent.n)
     annotation (Line(points={{-50,-40},{-50,30},{-50,30}}, color={0,0,255}));
+  connect(limiter.limit1, driveBus.vSrc) annotation (Line(points={{-8,-42},{-8,
+          -70},{0.1,-70},{0.1,-99.9}}, color={0,0,127}));
+  connect(negate.u, driveBus.vSrc) annotation (Line(points={{8,-64.8},{8,-70},{
+          0.1,-70},{0.1,-99.9}}, color={0,0,127}));
+  connect(signalVoltage.n, ldc.n)
+    annotation (Line(points={{50,10},{50,0}}, color={0,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Text(
           extent={{-100,130},{100,100}},
           lineColor={28,108,200},
-          textString="%name")}),
-                              Diagram(coordinateSystem(preserveAspectRatio=false)),
+          textString="%name"),
+        Line(
+          points={{-20,30},{-20,-30}},
+          color={0,0,255}),
+        Line(
+          points={{-20,0},{20,0}},
+          color={0,0,255}),
+        Line(
+          points={{20,30},{20,-30}},
+          color={0,0,255})}), Diagram(coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
 <p>
 The IdealInverter is based on a power balance between input and output. 
@@ -104,4 +112,4 @@ The output voltage is fed (with a delay = dead time) to the output voltage sourc
 The input current is driven by an integral controller observing the power balance.
 </p>
 </html>"));
-end IdealInverter;
+end IdealDcDcInverter;

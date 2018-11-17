@@ -1,6 +1,6 @@
-PartialExample
+PartialExampleIdealDcDc
 DriveBus
 PartialBattery
-PartialInverter
+PartialDcDcInverter
 PartialMotor
 PartialController

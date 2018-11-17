@@ -1,7 +1,7 @@
-within DriveControl.Examples;
+within DriveControl.Examples.DcDc;
 model PositionControlled "Position controlled drive"
-  extends Interfaces.PartialExample(load(startTime=2, speedDependency=
-          DriveControl.Types.SpeedDependency.Unidirectional));
+  extends Interfaces.PartialExampleIdealDcDc(load(startTime=2,
+    speedDependency=DriveControl.Types.SpeedDependency.Unidirectional));
   import Modelica.SIunits.Conversions.from_deg;
   Blocks.CurrentController currentController(data=data)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
@@ -40,7 +40,7 @@ equation
   annotation (
     Diagram(coordinateSystem(                                initialScale=0.1)),
     Icon(coordinateSystem(                                initialScale=0.1)),
-    experiment(StopTime=2.5, Interval=0.001),
+    experiment(StopTime=2.5, Interval=0.0001),
     Documentation(info="<html>
 <p>
 See: <a href=\"modelica://DriveControl.UsersGuide.PositionController\">User's guide, Position controller</a>
