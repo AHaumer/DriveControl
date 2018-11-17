@@ -16,7 +16,7 @@ record Data "Data of the whole drive, including load and controller"
   parameter Modelica.SIunits.AngularVelocity wL=wNom "Load speed"
     annotation(Dialog(group="Load"));
   //Source
-  parameter Modelica.SIunits.Voltage Vdc0=VMax + Ri*IMax "No-load DC-voltage of source"
+  parameter Modelica.SIunits.Voltage Vdc0=VMax/(1 - IMax/IdcMax) "No-load DC-voltage of source"
     annotation(Dialog(group="Source"));
   parameter Modelica.SIunits.Current IdcMax=100*IMax "Short-cirucit DC-current of source"
     annotation(Dialog(group="Source"));
