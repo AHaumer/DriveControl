@@ -12,7 +12,7 @@ record DataMY1020GD "Unite MY1020GD"
     PFric=40,
     IMax=1.5*INom,
     VMax=42);
-  import Modelica.SIunits.Conversions.from_rpm;
+  import Modelica.Units.Conversions.from_rpm;
   import Modelica.Constants.pi;
 annotation(defaultComponentPrefixes="parameter",  defaultComponentName="data", preferredView="info", Documentation(info="<html>
 <p>

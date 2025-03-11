@@ -5,8 +5,8 @@ block LimPI "limited PI-controller with anti-windup and feedforward"
   import Modelica.Constants.inf;
   parameter Boolean useI=true "PI else P" annotation(Evaluate=true);
   parameter Real k(unit="1")=1 "Gain";
-  parameter Modelica.SIunits.Time T(min=Modelica.Constants.small)=1
-    "Time Constant (T>0 required)" annotation(Dialog(enable=useI));
+  parameter Modelica.Units.SI.Time T(min=Modelica.Constants.small) = 1
+    "Time Constant (T>0 required)" annotation (Dialog(enable=useI));
   parameter Boolean FeedForward=true "Use FeedForward?"
     annotation(Dialog(group="FeedForward"), Evaluate=true);
   parameter Real kFF(unit="1")=1 "FeedForward gain"

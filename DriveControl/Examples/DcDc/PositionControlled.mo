@@ -2,7 +2,7 @@ within DriveControl.Examples.DcDc;
 model PositionControlled "Position controlled drive"
   extends Interfaces.PartialExampleIdealDcDc(load(startTime=2,
     speedDependency=DriveControl.Types.SpeedDependency.Unidirectional));
-  import Modelica.SIunits.Conversions.from_deg;
+  import Modelica.Units.Conversions.from_deg;
   Blocks.CurrentController currentController(data=data)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=0,

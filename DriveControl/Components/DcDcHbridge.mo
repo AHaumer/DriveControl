@@ -6,7 +6,7 @@ model DcDcHbridge "DC/DC H-bridge"
   Modelica.Electrical.PowerConverters.DCDC.Control.SignalPWM signalPWM(
       useConstantDutyCycle=false, f=data.fS)
     annotation (Placement(transformation(extent={{-10,10},{10,30}})));
-  Modelica.Electrical.PowerConverters.DCDC.Control.VoltageToDutyCycle
+  ObsoleteModelica4.Electrical.PowerConverters.DCDC.Control.VoltageToDutyCycle
     voltageToDutyCycle(vMax=data.VMax) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,

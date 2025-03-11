@@ -13,10 +13,11 @@ block SpeedController "Speed controller"
       k=kTune*data.kpW));
   parameter Real kFF_Acceleration=0 "Feed-forward of acceleration"
     annotation(Dialog(group="Advanced"));
-  parameter Modelica.SIunits.AngularVelocity w0=0 "Initial speed"
-    annotation(Dialog(group="Advanced"));
-  parameter Modelica.SIunits.Time Td=1e-6 "Derivative time constant of slewRateLimiter"
-    annotation(Dialog(group="Advanced"));
+  parameter Modelica.Units.SI.AngularVelocity w0=0 "Initial speed"
+    annotation (Dialog(group="Advanced"));
+  parameter Modelica.Units.SI.Time Td=1e-6
+    "Derivative time constant of slewRateLimiter"
+    annotation (Dialog(group="Advanced"));
   SlewRateLimiter slewRateLimiter(
     Rising=data.aMax,
     Falling=-data.aMax,

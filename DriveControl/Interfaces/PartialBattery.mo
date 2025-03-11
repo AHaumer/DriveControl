@@ -1,6 +1,6 @@
 within DriveControl.Interfaces;
 partial model PartialBattery "Partial DC source"
-  parameter Modelica.SIunits.Charge Q0(displayUnit="A.h")=0 "Initial charge";
+  parameter Modelica.Units.SI.Charge Q0(displayUnit="A.h") = 0 "Initial charge";
   parameter DataRecords.Data data
     annotation (Placement(transformation(extent={{-80,60},{-60,80}})));
   Modelica.Electrical.Analog.Interfaces.PositivePin bat_p
@@ -18,7 +18,7 @@ partial model PartialBattery "Partial DC source"
     y_start=Q0,
     k=-1)
     annotation (Placement(transformation(extent={{40,70},{20,90}})));
-  Modelica.SIunits.Charge Q(displayUnit="A.h")=charge.y "Charge";
+  Modelica.Units.SI.Charge Q(displayUnit="A.h") = charge.y "Charge";
 equation
   connect(ground.p, bat_n)
     annotation (Line(points={{80,-80},{80,-80},{80,-60},{80,-60},{80,-60},{100,-60},

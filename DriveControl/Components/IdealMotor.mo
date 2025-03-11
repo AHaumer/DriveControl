@@ -10,7 +10,8 @@ model IdealMotor "Ideal DC motor"
     annotation (Placement(transformation(extent={{10,-10},{-10,10}},
         rotation=0,
         origin={20,30})));
-  Modelica.Electrical.Analog.Basic.EMF emf(final useSupport=true, k=data.kPhi)
+  Modelica.Electrical.Analog.Basic.RotationalEMF emf(final useSupport=true, k=
+        data.kPhi)
     annotation (Placement(transformation(extent={{0,-10},{20,10}})));
 equation
   connect(ra.n, la.p)

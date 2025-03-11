@@ -2,12 +2,15 @@ within DriveControl.Blocks;
 block SpeedDependentTorque "Load torque dependent on speed"
   extends Modelica.Blocks.Interfaces.SISO;
   parameter DriveControl.Types.SpeedDependency speedDependency=DriveControl.Types.SpeedDependency.Linear "Speed dependency of torque";
-  parameter Modelica.SIunits.Torque tauN "Nominal torque at nominal speed";
-  parameter Modelica.SIunits.AngularVelocity wN(displayUnit="rpm")=1 "Nominal speed"
-    annotation(Dialog(enable=(speedDependency==DriveControl.Types.SpeedDependency.Linear or speedDependency==DriveControl.Types.SpeedDependency.Quadratic)));
-  parameter Modelica.SIunits.AngularVelocity w0(displayUnit="rpm")=1e-3 "Minimum speed for regularization"
-    annotation(Dialog(enable=speedDependency==DriveControl.Types.SpeedDependency.Constant, tab="Advanced"));
-  parameter Modelica.SIunits.Time startTime=0 "Start time";
+  parameter Modelica.Units.SI.Torque tauN "Nominal torque at nominal speed";
+  parameter Modelica.Units.SI.AngularVelocity wN(displayUnit="rpm") = 1
+    "Nominal speed" annotation (Dialog(enable=(speedDependency == DriveControl.Types.SpeedDependency.Linear
+           or speedDependency == DriveControl.Types.SpeedDependency.Quadratic)));
+  parameter Modelica.Units.SI.AngularVelocity w0(displayUnit="rpm") = 1e-3
+    "Minimum speed for regularization" annotation (Dialog(enable=
+          speedDependency == DriveControl.Types.SpeedDependency.Constant, tab=
+          "Advanced"));
+  parameter Modelica.Units.SI.Time startTime=0 "Start time";
 equation
   y = (if time<startTime then 0 else 1)*tauN*(
     if speedDependency==DriveControl.Types.SpeedDependency.Quadratic then smooth(1, if u>=0 then (u/wN)^2 else -(u/wN)^2)

@@ -12,7 +12,7 @@ record Data1Gx61660JCxx "1Gx6 166-0JCxx"
     PFric=1120,
     IMax=(3/pi*sqrt(2)*400 - kPhi*wMax)/Ra,
     VMax=3/pi*sqrt(2)*400);
-  import Modelica.SIunits.Conversions.from_rpm;
+  import Modelica.Units.Conversions.from_rpm;
   import Modelica.Constants.pi;
 annotation(defaultComponentPrefixes="parameter",  defaultComponentName="data", preferredView="info", Documentation(info="<html>
 <p>

@@ -9,7 +9,8 @@ block P2p "Movement point-to-point"
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={0,-110})));
-  parameter Modelica.SIunits.Time t0=0 "Movement starts t0 after start of simulation";
+  parameter Modelica.Units.SI.Time t0=0
+    "Movement starts t0 after start of simulation";
   parameter Real yIni=0 "Initial position (at start of simulation)";
   parameter Real yEnd "Desired end position";
   parameter Real vIni(final min=vMin, final max=vMax)=0 "Initial speed [vMin..vMax] 1/s";
@@ -19,10 +20,11 @@ block P2p "Movement point-to-point"
   parameter Real aMax(min= small) "Maximum positive acceleration [+small..+inf) 1/s2";
   parameter Real aMin(max=-small)=-aMax "Maximum negative acceleration (-inf..-small] 1/s2";
 protected
-  parameter Modelica.SIunits.Time tS(fixed=false) "Start time of simulation";
-  parameter Modelica.SIunits.Time tA(fixed=false) "Time span of accelecration";
-  parameter Modelica.SIunits.Time tC(fixed=false) "Time span of constant speed";
-  parameter Modelica.SIunits.Time tD(fixed=false) "Time span of deceleration";
+  parameter Modelica.Units.SI.Time tS(fixed=false) "Start time of simulation";
+  parameter Modelica.Units.SI.Time tA(fixed=false) "Time span of accelecration";
+  parameter Modelica.Units.SI.Time tC(fixed=false)
+    "Time span of constant speed";
+  parameter Modelica.Units.SI.Time tD(fixed=false) "Time span of deceleration";
   parameter Real y0 = yIni + vIni*t0 "Position when movement starts";
   parameter Real vLim(fixed=false) "Speed limit depending on direction of movement";
   parameter Real aA = if yEnd>y0 then aMax elseif yEnd<y0 then aMin else 0 "Acceleration";

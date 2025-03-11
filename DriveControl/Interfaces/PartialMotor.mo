@@ -3,8 +3,12 @@ partial model PartialMotor "Partial DC motor"
   extends Modelica.Mechanics.Rotational.Interfaces.PartialOneFlangeAndSupport;
   parameter DataRecords.Data data
     annotation (Placement(transformation(extent={{-10,40},{10,60}})));
-  output Modelica.SIunits.Angle phi(start=0, displayUnit="deg")=relAngleSensor.phi_rel;
-  output Modelica.SIunits.AngularVelocity w(start=0, displayUnit="rpm")=relSpeedSensor.w_rel;
+  output Modelica.Units.SI.Angle phi(
+    start=0,
+    displayUnit="deg") = relAngleSensor.phi_rel;
+  output Modelica.Units.SI.AngularVelocity w(
+    start=0,
+    displayUnit="rpm") = relSpeedSensor.w_rel;
   Interfaces.DriveBus driveBus annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,

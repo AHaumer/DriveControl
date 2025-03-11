@@ -12,8 +12,8 @@ block PositionController "Position controller"
       k=kTune*data.kpP));
   parameter Real kFF_Speed=0 "Feed-forward of speed"
     annotation(Dialog(group="Advanced"));
-  parameter Modelica.SIunits.Angle phi0=0 "Initial position"
-    annotation(Dialog(group="Advanced"));
+  parameter Modelica.Units.SI.Angle phi0=0 "Initial position"
+    annotation (Dialog(group="Advanced"));
   Modelica.Blocks.Continuous.Der w
     annotation (Placement(transformation(extent={{-40,-60},{-20,-40}})));
 equation

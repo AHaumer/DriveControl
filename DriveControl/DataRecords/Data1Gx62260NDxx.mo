@@ -12,7 +12,7 @@ record Data1Gx62260NDxx "1Gx6 226-0NDxx"
     PFric=3150,
     IMax=1.5*INom,
     VMax=3/pi*sqrt(2)*400);
-  import Modelica.SIunits.Conversions.from_rpm;
+  import Modelica.Units.Conversions.from_rpm;
   import Modelica.Constants.pi;
 annotation(defaultComponentPrefixes="parameter",  defaultComponentName="data", preferredView="info", Documentation(info="<html>
 <p>

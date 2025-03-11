@@ -15,7 +15,8 @@ package DriveControl "Library to demonstrate control of electrical drives"
 
 
 
-   annotation (uses(Modelica(version="3.2.2")), version="4.0.0", versionDate="2018-11-17",
+   annotation (uses(Modelica(version="4.1.0"), ObsoleteModelica4(version=
+            "4.1.0")),                          version="4.1.0", versionDate="2018-11-17",
     preferredView="info", Documentation(info="<html>
 <p><a href=\"https://www.oth-regensburg.de/en/faculties/electrical-engineering-and-information-technology.html\"><img src=\"modelica://DriveControl/Resources/Images/OTH_EI.png\" align=\"middle\"></a> 
    <a href=\"http://www.edrives.eu/\"><img src=\"modelica://DriveControl/Resources/Images/EDrives.png\" align=\"middle\"></a></p>
@@ -48,5 +49,6 @@ held at the <a href=\"https://modelica.org/events/modelica2017\">12<sup>th</sup>
               -90},{70,-100},{-70,-100},{-70,-90}},
               lineColor={0,0,0},
               fillColor={0,0,0},
-              fillPattern=FillPattern.Solid)}));
+              fillPattern=FillPattern.Solid)}),
+    conversion(noneFromVersion="4.0.0"));
 end DriveControl;

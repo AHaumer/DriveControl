@@ -53,5 +53,12 @@ annotation (Documentation(info="<html>
 <li>Implemented additional parameter records</li>
 <li>Implemented parameter switching frequency of inverter, subsequently calculation of deadtime and smoothing time constant</li>
 </ul>
+<h5>Version 4.1.0, 2025-03-11</h5>
+<p>
+<b>Note:</b> This is a non backward compatible enhancement of the library.
+</p>
+<ul>
+<li>Upgraded to version 4.1.0 of the Modelica Standrad Library.</li>
+</ul>
 </html>"));
 end ReleaseNotes;

@@ -1,7 +1,8 @@
 within DriveControl.Components;
 model IdealDcDcInverter "Ideal DC/DC inverter"
   extends DriveControl.Interfaces.PartialDcDcInverter;
-  parameter Modelica.SIunits.Time Ti=1e-6 "Integral time constant of power balance";
+  parameter Modelica.Units.SI.Time Ti=1e-6
+    "Integral time constant of power balance";
   Modelica.Electrical.Analog.Sensors.PowerSensor powerSensor1 annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},

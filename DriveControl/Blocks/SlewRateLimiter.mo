@@ -7,7 +7,7 @@ block SlewRateLimiter "Limits the slew rate of a signal"
     "Maximum rising slew rate [+small..+inf) 1/s";
   parameter Real Falling(max=-small) = -Rising
     "Maximum falling slew rate (-inf..-small] 1/s";
-  parameter Modelica.SIunits.Time Td(min=small) = 1e-6
+  parameter Modelica.Units.SI.Time Td(min=small) = 1e-6
     "Derivative time constant";
   parameter Modelica.Blocks.Types.Init initType=Modelica.Blocks.Types.Init.SteadyState
     "Type of initialization (SteadyState implies y = u)"
